@@ -59,13 +59,17 @@ int main()
         i++;
     }
 
-    int k = 0;
+    i = 0;
+    int j = 1;
+    int k = arquivos;
 
-    while (k <= arquivos)
+    int interacoes = 2 * arquivos - 2;
+
+    while (k <= interacoes)
     {
-        sprintf(file, "cep%d.dat", k);
-        sprintf(file1, "cep%d.dat", k + 1);
-        sprintf(file2, "cep%d.dat", arquivos + k);
+        sprintf(file, "cep%d.dat", i);
+        sprintf(file1, "cep%d.dat", j);
+        sprintf(file2, "cep%d.dat", k);
 
         f1 = fopen(file, "r");
         f2 = fopen(file1, "r");
@@ -86,28 +90,32 @@ int main()
                 fwrite(&e2, sizeof(Endereco), 1, saida);
                 fread(&e2, sizeof(Endereco), 1, f2);
             }
-
-            while (!feof(f1))
-            {
-                fwrite(&e1, sizeof(Endereco), 1, saida);
-                fread(&e1, sizeof(Endereco), 1, f1);
-            }
-
-            while (!feof(f2))
-            {
-                fwrite(&e2, sizeof(Endereco), 1, saida);
-                fread(&e2, sizeof(Endereco), 1, f2);
-            }
         }
+
+        while (!feof(f1))
+        {
+            fwrite(&e1, sizeof(Endereco), 1, saida);
+            fread(&e1, sizeof(Endereco), 1, f1);
+        }
+
+        while (!feof(f2))
+        {
+            fwrite(&e2, sizeof(Endereco), 1, saida);
+            fread(&e2, sizeof(Endereco), 1, f2);
+        }
+
+        i += 2;
+        j += 2;
+        k++;
 
         fclose(f1);
         fclose(f2);
         fclose(saida);
-
-        k++;
     }
 
     fclose(cep);
+
+    printf("Os arquivos foram intercalados");
 
     return 0;
 }
