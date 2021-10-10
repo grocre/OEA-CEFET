@@ -114,7 +114,7 @@ int main()
 
     fclose(cep);
 
-    printf("Os arquivos foram intercalados");
+    printf("Os arquivos foram intercalados e ordenados");
 
     return 0;
 }
